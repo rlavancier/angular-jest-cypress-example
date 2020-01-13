@@ -1,0 +1,35 @@
+<h1>
+  Heroes
+</h1>
+
+<div *ngIf="isLoading; else content">
+  <mat-spinner></mat-spinner>
+</div>
+
+<ng-template #content>
+  <h2>
+    New
+  </h2>
+
+  <div class="add-hero">
+    <mat-form-field>
+      <input matInput #heroName placeholder="New hero name" />
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      (click)="add(heroName.value); heroName.value=''"
+      [disabled]="heroName.value.length < 4"
+    >
+      add
+    </button>
+  </div>
+
+  <div class="heroes" *ngIf="heroes.length">
+    <h2>
+      All
+    </h2>
+
+    <app-hero *ngFor="let hero of heroes" [hero]="hero" (delete)="delete($event)"></app-hero>
+  </div>
+</ng-template>

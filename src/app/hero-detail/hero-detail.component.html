@@ -1,0 +1,35 @@
+<ng-template [ngIf]="hero">
+  <h2>{{hero.name | uppercase}} Details</h2>
+  <div>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Id"
+        [value]="hero.id"
+        name="id"
+        disabled
+      >
+    </mat-form-field>
+  </div>
+
+  <div>
+    <mat-form-field>
+      <input
+        matInput
+        placeholder="Name"
+        [(ngModel)]="hero.name"
+        name="name"
+        #heroName
+        required
+      >
+    </mat-form-field>
+  </div>
+
+  <button mat-raised-button id="go-back" (click)="goBack()">go back</button>
+  <button
+    mat-raised-button
+    id="save"
+    (click)="save()"
+    [disabled]="heroName.value.length < minName"
+  >save</button>
+</ng-template>

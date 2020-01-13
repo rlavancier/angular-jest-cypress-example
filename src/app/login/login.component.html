@@ -1,0 +1,60 @@
+<form #loginForm="ngForm" (ngSubmit)="checkLogin(loginForm)">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Login</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content *ngIf="!isLoading; else spinner">
+      <p *ngIf="hasError" id="error-message">
+        Wrong login
+      </p>
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter your email"
+          [email]="true"
+          name="email"
+          ngModel
+          #email="ngModel"
+          required
+        >
+
+        <mat-error *ngIf="email.invalid">
+          <ng-template [ngIf]="email.hasError('email')">
+              Not a valid email
+          </ng-template>
+          <ng-template [ngIf]="email.hasError('required')">
+              You must enter a value
+          </ng-template>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          placeholder="Enter your password"
+          [type]="hide ? 'password' : 'text'"
+          ngModel
+          name="password"
+          required
+        >
+
+        <button mat-icon-button id="password-visibility" matSuffix (click)="hide = !hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+      </mat-form-field>
+    </mat-card-content>
+
+    <ng-template #spinner>
+      <mat-card-content>
+        <mat-spinner></mat-spinner>
+      </mat-card-content>
+    </ng-template>
+
+    <ng-template [ngIf]="!isLoading">
+      <mat-card-actions>
+        <button mat-raised-button type="submit" [disabled]="loginForm.invalid">Login</button>
+      </mat-card-actions>
+    </ng-template>
+  </mat-card>
+</form>
