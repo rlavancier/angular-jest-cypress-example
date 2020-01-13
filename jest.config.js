@@ -7,6 +7,9 @@ module.exports = {
     "src/app/**/*.ts",
     "!src/app/**/*.module.ts"
   ],
+  testPathIgnorePatterns: [
+    "cypress"
+  ],
 
   moduleDirectories: ['node_modules', 'src']
 }
